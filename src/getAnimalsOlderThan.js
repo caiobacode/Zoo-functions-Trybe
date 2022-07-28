@@ -15,5 +15,4 @@ function getAnimalsOlderThan(animal, idade) {
   })
   return trfl
 }
-
 module.exports = getAnimalsOlderThan;
