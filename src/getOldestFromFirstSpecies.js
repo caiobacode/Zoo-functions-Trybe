@@ -2,29 +2,24 @@ const { employees, species } = require('../data/zoo_data');
 const data = require('../data/zoo_data');
 
 function getOldestFromFirstSpecies(id) {
-  let pessoa = 'a';
-  let obEspecie = 'a';
+  const array = ['a', 'a', 0];
   employees.forEach((obj) => {
     if (obj.id === id) {
-      pessoa = obj;
+      const especie = obj.responsibleFor[0];
+      species.forEach((ob) => {
+        if (ob.id === especie) {
+          array[0] = ob;
+        }
+      });
     }
   });
-  const especie = pessoa.responsibleFor[0];
-  species.forEach((ob) => {
-    if (ob.id === especie) {
-      obEspecie = ob;
+  array[0].residents.forEach((objet) => {
+    if (objet.age > array[2]) {
+      array[2] = objet.age;
+      array[1] = Object.values(objet);
     }
   });
-  let final = 0;
-  let maior = 0;
-  obEspecie.residents.forEach((objet) => {
-    if (objet.age > maior) {
-      maior = objet.age;
-      final = objet;
-    }
-  });
-  const ret = Object.values(final);
-  return ret;
+  return array[1];
 }
 
 module.exports = getOldestFromFirstSpecies;
